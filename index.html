@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data Launch Center | Ancilla AI — Coming Soon</title>
+  <meta name="description" content="Data Launch Center and Ancilla AI — an attempt to guide you through uncertainty in business, economics, compliance, and technology." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/svg+xml" href="dlc-favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0b0f14;
+      --ink-soft: rgba(11, 15, 20, 0.78);
+      --dusk: #0c1b2a;
+      --amber: #f6c978;
+      --ice: #e8f0ff;
+      --mist: rgba(232, 240, 255, 0.16);
+      --glass: rgba(8, 16, 26, 0.55);
+      --stroke: rgba(232, 240, 255, 0.2);
+      --accent: #83e6ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--ice);
+      background: radial-gradient(circle at 15% 20%, #1b2b3f 0%, #0b1119 45%, #05070a 100%);
+      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+      letter-spacing: 0.01em;
+      overflow-x: hidden;
+    }
+
+    .bg-orbit {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.7;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(131, 230, 255, 0.18), transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(246, 201, 120, 0.18), transparent 60%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.04), transparent 65%);
+      mix-blend-mode: screen;
+    }
+
+    .grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(transparent 95%, rgba(255,255,255,0.05) 100%),
+        linear-gradient(90deg, transparent 95%, rgba(255,255,255,0.05) 100%);
+      background-size: 120px 120px;
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 72px 6vw 64px;
+      display: grid;
+      gap: 36px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .sigil {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: radial-gradient(circle, rgba(8, 16, 26, 0.7), rgba(5, 7, 10, 0.9));
+      box-shadow: 0 0 25px rgba(131, 230, 255, 0.25);
+      display: grid;
+      place-items: center;
+      padding: 8px;
+    }
+
+    .sigil img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(131, 230, 255, 0.35));
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      color: rgba(232,240,255,0.65);
+    }
+
+    .brand-text h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      font-weight: 600;
+      color: #fff6e6;
+    }
+
+    .status-pill {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(131,230,255,0.12);
+      border: 1px solid rgba(131,230,255,0.35);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--accent);
+    }
+
+    .hero {
+      display: grid;
+      gap: 28px;
+    }
+
+    .hero h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.05;
+      color: #f7f2ea;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 760px;
+      color: rgba(232,240,255,0.78);
+    }
+
+    .hero p strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .panels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .panel {
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      padding: 22px 20px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 40px rgba(5,7,10,0.45);
+    }
+
+    .panel h3 {
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(232,240,255,0.6);
+      margin-bottom: 10px;
+    }
+
+    .panel p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(232,240,255,0.8);
+    }
+
+    .panel ul {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      font-size: 0.95rem;
+      color: rgba(232,240,255,0.75);
+    }
+
+    .panel ul li::before {
+      content: "◆";
+      margin-right: 8px;
+      color: var(--amber);
+    }
+
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(246,201,120,0.5);
+      color: #fff0d3;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(246,201,120,0.2);
+    }
+
+    footer {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      gap: 12px;
+      color: rgba(232,240,255,0.65);
+      font-size: 0.92rem;
+    }
+
+    .contact {
+      display: grid;
+      gap: 4px;
+    }
+
+    .contact strong {
+      color: rgba(255,255,255,0.8);
+      font-weight: 500;
+    }
+
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .status-pill {
+        align-self: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orbit"></div>
+  <div class="grid"></div>
+  <main>
+    <header>
+      <div class="brand">
+        <div class="sigil" aria-hidden="true">
+          <img src="dlc-symbol.svg" alt="Data Launch Center logo" />
+        </div>
+        <div class="brand-text">
+          <span>Data Launch Center</span>
+          <h1>Ancilla AI</h1>
+        </div>
+      </div>
+      <div class="status-pill">Coming Soon</div>
+    </header>
+
+    <section class="hero">
+      <h2>Mapping the uncertainty that defines the next decade of business.</h2>
+      <p>
+        <strong>No one knows what the future of doing business will bring.</strong>
+        Global finance, economics, enterprise operations, politics, legal compliance, and technology are filled with uncertainty.
+        Data Launch Center and Ancilla AI exist as an attempt to guide you through these uncertainties — to translate complex
+        signals into decisive action.
+      </p>
+      <p>
+        Ancilla is designed to become the mouth of a symbolic intelligence stack — synthesizing insights, evidence, and strategy
+        into a single directive narrative. We are building the bridge now.
+      </p>
+      <div class="cta">
+        <a href="mailto:info@datalaunchcenter.com">Request Early Access</a>
+        <a href="mailto:info@datalaunchcenter.com?subject=Ancilla%20AI%20Updates">Get Launch Updates</a>
+      </div>
+    </section>
+
+    <section class="panels">
+      <div class="panel">
+        <h3>Signals We Track</h3>
+        <ul>
+          <li>Macro & market volatility</li>
+          <li>Regulatory & compliance shifts</li>
+          <li>Operational risk & resilience</li>
+          <li>Strategic growth inflection points</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Ancilla Will Deliver</h3>
+        <ul>
+          <li>Decision-grade briefings</li>
+          <li>Evidence-linked reasoning trails</li>
+          <li>Voice & text synthesis on demand</li>
+          <li>Adaptive, policy-aware recommendations</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Why It Matters</h3>
+        <p>
+          When uncertainty rises, organizations need clarity fast.
+          Ancilla compresses fragmented data into a coherent command surface,
+          so your next move is grounded, compliant, and confident.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="contact">
+        <strong>Data Launch Center</strong>
+        <span>Centrumboulevard 15</span>
+        <span>3541 DK Utrecht</span>
+        <span>Utrecht - Netherlands</span>
+      </div>
+      <div class="contact">
+        <span>KVK-nummer: 77105370</span>
+        <span>Email: info@datalaunchcenter.com</span>
+        <span>Tel: +31686340466</span>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
